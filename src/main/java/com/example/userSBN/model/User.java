@@ -1,13 +1,21 @@
 package com.example.userSBN.model;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import org.apache.catalina.Store;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     // Klassen variable
 
@@ -65,14 +73,23 @@ public class User {
     @Column(name = "birthday")
     private String birthday;
 
-    // Einfache konstruktor
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "faecher_student",
+            joinColumns = {
+                    @JoinColumn(name = "student_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "fach_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private Set<Faecher> courses = new HashSet<>();
 
+
+    // Einfache konstruktor
     public User(){
 
     }
 
     // Konstruktor
-
     public User(String name, String vorname, String email, String telefon, String strasse, String ort, String plz, String sex, String spitzname, String birthday) {
         this.name = name;
         this.vorname = vorname;

@@ -1,5 +1,6 @@
 package com.example.userSBN.repository;
 
+import com.example.userSBN.model.Faecher;
 import com.example.userSBN.model.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,4 +17,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query(value = "SELECT u FROM User u WHERE u.name = :keyword or u.vorname = :keyword or u.email = :keyword or u.telefon = :keyword or u.strasse = :keyword or u.ort = :keyword or u.plz = :keyword or u.sex = :keyword or u.spitzname = :keyword or u.birthday = :keyword")
     public List<User> search(@Param("keyword") String keyword);
+
 }

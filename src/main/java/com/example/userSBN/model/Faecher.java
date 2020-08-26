@@ -1,14 +1,21 @@
 package com.example.userSBN.model;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Data
 
 @Entity
 @Table(name = "faecher")
-public class Faecher {
+public class Faecher implements Serializable{
 
 
     //Klassen Variable model faecher
@@ -30,12 +37,14 @@ public class Faecher {
     @Column(name = "stufe")
     private String stufe;
 
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    private Set<User> students = new HashSet<>();
+
 
     //Einfache konstruktor
     public Faecher(){
 
     }
-
 
     public Faecher(String name, String abkuerzung, String stufe) {
         this.name = name;
@@ -44,9 +53,7 @@ public class Faecher {
     }
 
 
-
     //Getter and Setter
-
     public int getId() {
         return id;
     }
