@@ -13,6 +13,7 @@ public interface FaecherRepository extends CrudRepository<Faecher, Integer> {
 
     List<Faecher> findByName(String name);
 
+
     @Query(value = "SELECT u FROM faecher u WHERE u.name = :keyword or u.abkuerzung = :keyword or u.stufe = :keyword", nativeQuery = true)
     public List<Faecher> search(@Param("keyword") String keyword);
 

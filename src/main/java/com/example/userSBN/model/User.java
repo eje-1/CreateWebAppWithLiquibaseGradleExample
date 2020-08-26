@@ -73,6 +73,7 @@ public class User implements Serializable {
     @Column(name = "birthday")
     private String birthday;
 
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "faecher_student",
             joinColumns = {
@@ -192,5 +193,13 @@ public class User implements Serializable {
 
     public void setBirthday(String birthday){
         this.birthday = birthday;
+    }
+
+    public Set<Faecher> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Faecher> courses) {
+        this.courses = courses;
     }
 }
