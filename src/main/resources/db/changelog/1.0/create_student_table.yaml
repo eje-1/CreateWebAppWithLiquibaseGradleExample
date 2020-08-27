@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_student_table
+      logicalFilePath: create_student_table.yaml
+      author: ernest
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vorname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: telefon
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: strasse
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ort
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: plz
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sex
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spitzname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthday
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
