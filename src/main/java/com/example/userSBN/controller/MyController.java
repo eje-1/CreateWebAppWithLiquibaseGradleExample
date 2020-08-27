@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -104,11 +105,11 @@ public class MyController {
     @RequestMapping(value = { "/editPerson/update/{id}" }, method = RequestMethod.GET)
     public String showEditPersonPage2(@PathVariable(name = "id") int id, Model model)  {
 
-        Optional<User> result = userRepository.findById(id);
+        User userEdit = userRepository.findById(id);
         List<Faecher> faecherOptional = faecherRepository.findAll();
 
 
-        model.addAttribute("editUser", result);
+        model.addAttribute("editUser", userEdit);
         model.addAttribute("faecherOptional", faecherOptional);
 
 
@@ -119,14 +120,11 @@ public class MyController {
     @RequestMapping(value = {"/editPerson/update/{id}"}, method = RequestMethod.POST)
     public String saveEditPerson2(Model model, int id, @ModelAttribute("editUser") User user) {
 
-        Optional<User> result = userRepository.findById(id);
-        User editPerson = result.orElse(null);
+        User userEdit = userRepository.findById(id);
 
         if(user != null){
             userRepository.save(user);
         }
-
-
 
         return "redirect:/index2";
 

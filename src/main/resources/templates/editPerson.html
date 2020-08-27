@@ -108,13 +108,17 @@
                     <td><input type="text" th:field="*{birthday}" /></td>
                 </tr>
 
-                <th:block th:each="courses : ${faecherOptional}">
+                <tr align="center">
+                    <td> </td>
+                    <td> <b>Courses</b> </td>
+                </tr>
+
+                <tr align="center" th:each="courses : ${faecherOptional}">
                     <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="faecherOptional" th:value="${courses.getId()}" th:field="*{courses}"> <span th:text="${courses.name}">Courses</span>
-                        </label>
+                        <td><label><span th:text="${courses.name}">Courses</span></label></td>
+                        <td><label><input type="checkbox" name="faecherOptional" th:value="${courses.getId()}" th:field="*{courses}"></label></td>
                     </div>
-                </th:block>
+                </tr>
 
             </table>
 
