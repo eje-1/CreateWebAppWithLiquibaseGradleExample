@@ -6,7 +6,3 @@ databaseChangeLog:
   - include:
       file: 1.0/create_faecher_and_student_table.yaml
       relativeToChangelogFile: true
-
-  - include:
-      file: 1.0/create_student_table.yaml
-      relativeToChangelogFile: true

@@ -43,8 +43,8 @@ public class FaecherController {
     public String faecherIndex(Model model){
 
         List<Faecher> allFeacher = faecherRepository.findAll();//get all entries from Entry table into a list
-        model.addAttribute("faecher", allFeacher);//get the contents of list into the Thymeleaf template
 
+        model.addAttribute("faecher", allFeacher);//get the contents of list into the Thymeleaf template
         model.addAttribute("mode", appmode);
 
         return "faecherIndex";

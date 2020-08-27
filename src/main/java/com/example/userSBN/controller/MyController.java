@@ -13,9 +13,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -118,9 +120,9 @@ public class MyController {
 
     // edit user save method
     @RequestMapping(value = {"/editPerson/update/{id}"}, method = RequestMethod.POST)
-    public String saveEditPerson2(Model model, int id, @ModelAttribute("editUser") User user) {
+    public String saveEditPerson2(Model model, @ModelAttribute @Valid User user, BindingResult result) {
 
-        User userEdit = userRepository.findById(id);
+        user = userRepository.findById(user.getId());
 
         if(user != null){
             userRepository.save(user);
