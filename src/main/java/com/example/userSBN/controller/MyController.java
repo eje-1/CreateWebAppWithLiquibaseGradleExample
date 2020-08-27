@@ -1,6 +1,8 @@
 package com.example.userSBN.controller;
 
+import com.example.userSBN.model.Faecher;
 import com.example.userSBN.model.User;
+import com.example.userSBN.repository.FaecherRepository;
 import com.example.userSBN.repository.UserRepository;
 import com.example.userSBN.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class MyController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    FaecherRepository faecherRepository;
 
     // Welcome message first page this messeage is application propeties
     @Value("${welcome.message}")
@@ -100,7 +105,11 @@ public class MyController {
     public String showEditPersonPage2(@PathVariable(name = "id") int id, Model model)  {
 
         Optional<User> result = userRepository.findById(id);
+        List<Faecher> faecherOptional = faecherRepository.findAll();
+
+
         model.addAttribute("editUser", result);
+        model.addAttribute("faecherOptional", faecherOptional);
 
 
         return "editPerson";
@@ -112,9 +121,12 @@ public class MyController {
 
         Optional<User> result = userRepository.findById(id);
         User editPerson = result.orElse(null);
+
         if(user != null){
             userRepository.save(user);
         }
+
+
 
         return "redirect:/index2";
 

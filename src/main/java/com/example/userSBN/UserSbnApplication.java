@@ -23,29 +23,4 @@ public class UserSbnApplication {
 
 	}
 
-	@Bean
-	public CommandLineRunner mappingDemo(UserRepository userRepository,
-										 FaecherRepository faecherRepository){
-		return args -> {
-
-			//Create student
-			User student = new User("Test","Student","","","","","","","","");
-
-			userRepository.save(student);
-
-			//Create three courses
-			Faecher course1 = new Faecher("Mathe","M","Grundschule");
-			Faecher course2 = new Faecher("Deutsch","D","Grundschule");
-			Faecher course3 = new Faecher("Biologie","B","Grundschule");
-
-			faecherRepository.saveAll(Arrays.asList(course1,course2,course3));
-
-			student.getCourses().addAll(Arrays.asList(course1,course2,course3));
-
-			userRepository.save(student);
-
-		};
-	}
-
-
 }
