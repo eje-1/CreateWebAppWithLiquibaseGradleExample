@@ -38,7 +38,7 @@ public class Faecher implements Serializable{
     private String stufe;
 
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-    private Set<User> students = new HashSet<>();
+    Set<User> students;
 
 
     //Einfache konstruktor

@@ -5,6 +5,8 @@ import com.example.userSBN.model.User;
 import com.example.userSBN.repository.FaecherRepository;
 import com.example.userSBN.repository.UserRepository;
 import com.example.userSBN.services.UserService;
+import liquibase.pro.packaged.U;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.validation.Valid;
@@ -97,7 +100,7 @@ public class MyController {
 
     //delete an user
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public String deleteMethod2(@PathVariable(value = "id") int userID){
+    public String deleteMethod(@PathVariable(value = "id") int userID){
 
         userRepository.deleteById(userID);
         return "redirect:/index2";
@@ -105,10 +108,11 @@ public class MyController {
 
     // editUser get Id
     @RequestMapping(value = { "/editPerson/update/{id}" }, method = RequestMethod.GET)
-    public String showEditPersonPage2(@PathVariable(name = "id") int id, Model model)  {
+    public String showEditPersonPage(@PathVariable(name = "id") int id, Model model)  {
 
-        User userEdit = userRepository.findById(id);
+        Optional<User> userEdit = userRepository.findById(id);
         List<Faecher> faecherOptional = faecherRepository.findAll();
+        //List<Faecher> faecherOptional = Arrays.asList(faecherRepository.findAll().toArray(new Faecher[0]));
 
 
         model.addAttribute("editUser", userEdit);
@@ -120,17 +124,23 @@ public class MyController {
 
     // edit user save method
     @RequestMapping(value = {"/editPerson/update/{id}"}, method = RequestMethod.POST)
-    public String saveEditPerson2(Model model, @ModelAttribute @Valid User user, BindingResult result) {
+    public String saveEditPerson(Model model, int id, @ModelAttribute @Valid User user,BindingResult error, Faecher faecher) {
 
-        user = userRepository.findById(user.getId());
 
-        if(user != null){
+        Optional<User> result = userRepository.findById(id);
+        List<Faecher> faecherList = faecherRepository.findAll();
+        System.out.println(error);
+
+        if(user != null || faecher != null) {
+
+            faecherRepository.saveAll(Arrays.asList());
             userRepository.save(user);
         }
 
         return "redirect:/index2";
 
     }
+
 
     //addPerson show page
     @RequestMapping(value = {"/createPerson"}, method = RequestMethod.GET)

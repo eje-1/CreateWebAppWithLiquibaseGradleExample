@@ -1,5 +1,6 @@
 package com.example.userSBN.model;
 
+
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -82,7 +83,7 @@ public class User implements Serializable {
             inverseJoinColumns = {
                     @JoinColumn(name = "fach_id", referencedColumnName = "id",
                             nullable = false, updatable = false)})
-    private Set<Faecher> courses = new HashSet<>();
+    Set<Faecher> courses;
 
 
     // Einfache konstruktor
