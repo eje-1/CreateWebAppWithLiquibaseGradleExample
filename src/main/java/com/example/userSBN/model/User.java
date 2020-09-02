@@ -85,6 +85,9 @@ public class User implements Serializable {
                             nullable = false, updatable = false)})
     Set<Faecher> courses;
 
+    @Transient
+    private Set<Integer> ints ;
+
 
     // Einfache konstruktor
     public User(){
@@ -203,4 +206,22 @@ public class User implements Serializable {
     public void setCourses(Set<Faecher> courses) {
         this.courses = courses;
     }
+
+    public boolean hasFaecher(Faecher faecher){
+        for(Faecher studentFach : getCourses()){
+            if(studentFach.getId() == faecher.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Set<Integer> getInts() {
+        return ints;
+    }
+
+    public void setInts(Set<Integer> ints) {
+        this.ints = ints;
+    }
+
 }

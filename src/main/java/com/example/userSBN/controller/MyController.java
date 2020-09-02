@@ -112,10 +112,9 @@ public class MyController {
 
         Optional<User> userEdit = userRepository.findById(id);
         List<Faecher> faecherOptional = faecherRepository.findAll();
-        //List<Faecher> faecherOptional = Arrays.asList(faecherRepository.findAll().toArray(new Faecher[0]));
 
 
-        model.addAttribute("editUser", userEdit);
+        model.addAttribute("editUser", userEdit.get());
         model.addAttribute("faecherOptional", faecherOptional);
 
 
@@ -124,21 +123,37 @@ public class MyController {
 
     // edit user save method
     @RequestMapping(value = {"/editPerson/update/{id}"}, method = RequestMethod.POST)
-    public String saveEditPerson(Model model, int id, @ModelAttribute @Valid User user,BindingResult error, Faecher faecher) {
+    public String saveEditPerson(Model model, @PathVariable(name = "id") Integer id, @ModelAttribute @Valid User user,BindingResult error) {
 
 
         Optional<User> result = userRepository.findById(id);
-        List<Faecher> faecherList = faecherRepository.findAll();
+
         System.out.println(error);
 
-        if(user != null || faecher != null) {
+        if(result.isPresent()) {
+            User user1 = result.get();
+            user1.setName(user.getName());
+            user1.setVorname(user.getVorname());
+            user1.setEmail(user.getEmail());
+            user1.setTelefon(user.getTelefon());
+            user1.setStrasse(user.getStrasse());
+            user1.setOrt(user.getOrt());
+            user1.setPlz(user.getPlz());
+            user1.setSex(user.getSex());
+            user1.setSpitzname(user.getSpitzname());
+            user1.setBirthday(user.getBirthday());
+            //
+            for (Integer fachId : user.getInts()){
+                Optional<Faecher> faecherOptional = faecherRepository.findById(fachId);
+                if (faecherOptional.isPresent()){
+                    user1.getCourses().add(faecherOptional.get());
+                }
+            }
 
-            faecherRepository.saveAll(Arrays.asList());
-            userRepository.save(user);
+            userRepository.save(user1);
+
         }
-
         return "redirect:/index2";
-
     }
 
 

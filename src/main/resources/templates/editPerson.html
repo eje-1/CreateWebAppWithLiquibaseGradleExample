@@ -35,7 +35,7 @@
     </nav>
 </head>
 <body class="indexBody">
-<form th:action="@{/editPerson/update/{id}}" th:object="${editUser}" method="POST">
+<form th:action="@{/editPerson/update/{id}(id=${editUser.id})}" th:object="${editUser}" method="POST">
 
     <div class="jumbotron jumbotron">
         <div class="row">
@@ -53,10 +53,6 @@
         <hr class="my-4" />
         <div class="container">
             <table class="table table-bordered table-dark">
-                <tr align="center">
-                    <td><label>ID:</label></td>
-                    <td><input readonly type="text" th:field="*{id}" /></td>
-                </tr>
 
                 <tr align="center">
                     <td><label>First Name:</label></td>
@@ -117,8 +113,11 @@
 
                 <tr align="center" th:each="courses : ${faecherOptional}">
                     <div class="checkbox">
-                        <td><label><span th:text="${courses.name}">Courses</span></label></td>
-                        <td><label><input type="checkbox" name="faecherOptional" th:value="${courses.getId()}" th:field="*{courses}"></label></td>
+                        <td><label><span th:text="${courses.id}">Id</span></label>
+                            <label><span th:text="${courses.name}">Name</span></label>
+                            <label><span th:text="${courses.abkuerzung}">Abkürzung</span></label>
+                            <label><span th:text="${courses.stufe}">Stufe</span></label></td>
+                        <td><label><input type="checkbox" th:field="*{ints}" th:value="${courses.getId()}" ></label></td>
                     </div>
                 </tr>
             </table>
