@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Edit Fach</title>
+    <title>Edit Courses</title>
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" /> <link href="../static/css/mdb.min.css" rel="stylesheet" th:href="@{/css/mdb.min.css}" />
     <!--My Css -->
@@ -27,11 +27,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="faecherIndex">Home </a>
+                    <a class="nav-link" href="faecherIndex">Courses </a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link active" href="addFaecher">Create Fächer<span class="sr-only">(current)</span></a>
+                    <a class="nav-link active" href="addFaecher">Create Courses<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -44,8 +44,8 @@
     <div class="jumbotron jumbotron">
         <div class="row">
             <div class="col">
-                <h1 class="display-4">Edit Fächer</h1>
-                <p class="lead">Edit new Fach...</p>
+                <h1 class="display-4">Edit Courses</h1>
+                <p class="lead">Edit new Courses...</p>
             </div>
         </div>
         <br />
@@ -58,17 +58,17 @@
                 </tr>
 
                 <tr align="center">
-                    <td><label>Name:</label></td>
+                    <td><label>Courses Name:</label></td>
                     <td><input type="text" th:field="*{name}" /></td>
                 </tr>
 
                 <tr align="center">
-                    <td><label>Abkürzung:</label></td>
+                    <td><label>Abbreviation:</label></td>
                     <td><input type="text" th:field="*{abkuerzung}" /></td>
                 </tr>
 
                 <tr align="center">
-                    <td><label>Stufe:</label></td>
+                    <td><label>Level:</label></td>
                     <td><input type="radio" th:field="*{stufe}" value="Grundschule" />&nbsp; Grundschule &nbsp;
                         <input type="radio" th:field="*{stufe}" value="Hauptschulen" />&nbsp; Hauptschulen
                         <input type="radio" th:field="*{stufe}" value="Realschulen" />&nbsp; Realschule

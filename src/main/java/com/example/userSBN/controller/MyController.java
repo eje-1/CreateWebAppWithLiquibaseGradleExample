@@ -149,9 +149,7 @@ public class MyController {
                     user1.getCourses().add(faecherOptional.get());
                 }
             }
-
             userRepository.save(user1);
-
         }
         return "redirect:/index2";
     }

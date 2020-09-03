@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Database List</title>
+    <title>Database List of Courses</title>
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" /> <link href="../static/css/mdb.min.css" rel="stylesheet" th:href="@{/css/mdb.min.css}" />
     <!--My Css -->
@@ -31,15 +31,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/createPerson">Create Person</a>
+                    <a class="nav-link" href="http://localhost:8080/createPerson">Create Student</a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link active" href="http://localhost:8080/faecherIndex">Index Fächer <span class="sr-only">(current)</span></a>
+                    <a class="nav-link active" href="http://localhost:8080/faecherIndex">Index Courses <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/addFaecher">Create Fächer</a>
+                    <a class="nav-link" href="http://localhost:8080/addFaecher">Create Courses</a>
                 </li>
 
             </ul>
@@ -50,13 +50,13 @@
 <div class="jumbotron jumbotron">
     <div class="row">
         <div class="col">
-            <h1 class="display-4">Fäecher</h1>
+            <h1 class="display-4">Courses</h1>
             <p class="lead">School</p>
         </div>
         <div class="col col-lg-2">
             <br />
             <br />
-            <a class="btn btn-primary btn-lg btn-block" href="/addFaecher" role="button">Create Fächer</a> <!-- Create Fächer  -->
+            <a class="btn btn-primary btn-lg btn-block" href="/addFaecher" role="button">Create Courses</a> <!-- Create Fächer  -->
         </div>
     </div>
     <hr class="my-4" />
@@ -65,9 +65,9 @@
         <table id="dtBasicExample" class="table table-bordered table-dark" >
             <thead>
             <tr align="center">
-                <th scope="col">Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Abkürzung &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Stufe &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                <th scope="col">Courses Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                <th scope="col">Abbreviation &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                <th scope="col">Level &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
                 <th scope="col">Actions on Row</th>
             </tr>
             </thead>

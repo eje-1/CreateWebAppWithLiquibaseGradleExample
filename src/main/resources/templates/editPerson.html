@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Edit User</title>
+    <title>Edit Student</title>
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" /> <link href="../static/css/mdb.min.css" rel="stylesheet" th:href="@{/css/mdb.min.css}" />
     <!--My Css -->
@@ -22,13 +22,13 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/index2">Home </a>
+                    <a class="nav-link" href="http://localhost:8080/index2">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/createPerson">Create Person</a>
+                    <a class="nav-link" href="http://localhost:8080/createPerson">Create Student</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link active" href="#">Edit Person<span class="sr-only">(current)</span></a>
+                    <a class="nav-link active" href="#">Edit Student<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -40,7 +40,7 @@
     <div class="jumbotron jumbotron">
         <div class="row">
             <div class="col">
-                <h1 class="display-4">Edit Person List</h1>
+                <h1 class="display-4">Edit Studnet data</h1>
                 <p class="lead">You can change this data...</p>
             </div>
             <div class="col col-lg-2">
@@ -85,7 +85,7 @@
                 </tr>
 
                 <tr align="center">
-                    <td><label>PLZ:</label></td>
+                    <td><label>Postcode:</label></td>
                     <td><input type="text" th:field="*{plz}" /></td>
                 </tr>
 
