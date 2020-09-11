@@ -4,10 +4,11 @@ import com.example.userSBN.model.Faecher;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import java.util.List;
 
-public interface FaecherRepository extends CrudRepository<Faecher, Integer> {
+public interface FaecherRepository extends CrudRepository<Faecher, Integer>, QueryByExampleExecutor<Faecher> {
 
     List<Faecher> findAll();
 
