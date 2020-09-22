@@ -3,13 +3,8 @@ package com.example.userSBN.model;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Data
 
@@ -37,8 +32,7 @@ public class Faecher implements Serializable{
     @Column(name = "stufe")
     private String stufe;
 
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-    Set<User> students;
+    //@ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
 
 
     //Einfache konstruktor

@@ -30,9 +30,9 @@ repositories {
 dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
-
 	testCompileOnly 'org.projectlombok:lombok:1.18.12'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.5.Final'
 
 	testCompile 'junit:junit:4.12'

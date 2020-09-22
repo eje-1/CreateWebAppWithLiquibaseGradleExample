@@ -1,12 +1,13 @@
 package com.example.userSBN.controller;
 
 import com.example.userSBN.model.User;
-import com.example.userSBN.repository.FaecherRepository;
+import com.example.userSBN.repository.ISearchService;
 import com.example.userSBN.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,38 +23,33 @@ public class SearchController {
     SearchRepository searchRepository;
 
     @Autowired
-    FaecherRepository repository;
+    ISearchService iSearchService;
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public List<User> search(@RequestBody final User student) {
+    public List<User> search(@Param("key") String key) {
 
         // COUNT Students
         System.out.println("\nGet count of Studnets");
         System.out.println("Number of Students inserted : " + searchRepository.count());
 
-        // RETRIEVE ALL 'Biologie' students - Using QueryByExample
-        System.out.println("\nRetreving all 'Biologie' students - Using QueryByExample(QBE)");
 
-        searchRepository.findAll();
+        return iSearchService.findByName(key);
 
-        //Filter
-        User findStudent1 = new User();
-        findStudent1.setOrt("Berlin");
-        Example<User> example = Example.of(findStudent1);
+    }
 
-        List<User> result = searchRepository.findAll(example);
-        for (User studnetBremen : result) {
+    @RequestMapping(value = "/searchAll", method = RequestMethod.POST)
+    public List<User> searchFindAll(@RequestBody final User findStudent) {
 
-            System.out.println(studnetBremen);
-        }
-
-        return searchRepository.findAll(Example.of(findStudent1,
-                ExampleMatcher.matchingAll()
+        return searchRepository.findAll(Example.of(findStudent,
+                ExampleMatcher.matchingAny()
                         .withIgnoreNullValues()
                         .withIgnorePaths("id")
                         .withStringMatcher(ExampleMatcher.StringMatcher.STARTING)));
+
+
     }
+
 
 
 }

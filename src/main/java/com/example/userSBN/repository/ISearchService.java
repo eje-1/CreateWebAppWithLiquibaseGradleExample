@@ -1,10 +1,10 @@
-package com.example.userSBN.services;
+package com.example.userSBN.repository;
 
 import com.example.userSBN.model.User;
 
 import java.util.List;
 
-public interface IStudentService {
+public interface ISearchService {
 
     List<User> findByNameEnding(String ending);
     List<User> findByName(String name);
