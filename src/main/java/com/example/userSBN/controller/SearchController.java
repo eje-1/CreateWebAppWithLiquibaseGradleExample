@@ -27,14 +27,15 @@ public class SearchController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public List<User> search(@Param("key") String key) {
+    public List<User> search(@Param("name") String name, @Param("vorname") String vorname) {
 
         // COUNT Students
         System.out.println("\nGet count of Studnets");
         System.out.println("Number of Students inserted : " + searchRepository.count());
 
+        // List<user> result = List.intersect(userByEmail, userByName, userByNumber);
 
-        return iSearchService.findByName(key);
+        return null;
 
     }
 
@@ -50,6 +51,8 @@ public class SearchController {
 
     }
 
+
+    /*ich kann jeder iserviceList in model hinzufugen und model return*/
 
 
 }

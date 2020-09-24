@@ -5,8 +5,6 @@ import com.example.userSBN.model.User;
 import com.example.userSBN.repository.FaecherRepository;
 import com.example.userSBN.repository.UserRepository;
 import com.example.userSBN.services.UserService;
-import liquibase.pro.packaged.U;
-import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,13 +14,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,7 +76,6 @@ public class MyController {
 
         List<User> allUsers = userRepository.findAll(); //get all entries from Entry table into a list
         model.addAttribute("users", allUsers);//get the contents of list into the Thymeleaf template
-
         model.addAttribute("mode", appMode);
 
         return "index2";
