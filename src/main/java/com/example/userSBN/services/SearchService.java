@@ -120,7 +120,7 @@ public class SearchService implements ISearchService {
         findOrt.setOrt(ort);
 
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name", "vorname", "email", "telefon", "strasse")
+                .withIgnorePaths("id")
                 .withIgnoreCase();
 
         Example<User> example = Example.of(findOrt, matcher);
