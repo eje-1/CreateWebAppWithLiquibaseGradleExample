@@ -1,6 +1,8 @@
 package com.example.userSBN.services;
 
+import com.example.userSBN.model.Faecher;
 import com.example.userSBN.model.User;
+import com.example.userSBN.repository.FaecherRepository;
 import com.example.userSBN.repository.ISearchService;
 import com.example.userSBN.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,16 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SearchService implements ISearchService {
 
     @Autowired
     SearchRepository repository;
+
+    @Autowired
+    FaecherRepository faecherRepository;
 
 
     @Override
@@ -26,7 +32,9 @@ public class SearchService implements ISearchService {
         findName.setName(name);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id");
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("name", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findName, exampleMatcher);
         list = repository.findAll(example);
@@ -44,8 +52,9 @@ public class SearchService implements ISearchService {
         findLastName.setVorname(vorname);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name")
-                .withIgnoreCase();
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("vorname", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findLastName,exampleMatcher);
         list = repository.findAll(example);
@@ -62,7 +71,9 @@ public class SearchService implements ISearchService {
         findEmail.setEmail(email);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name", "vorname")
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("email", matcher -> matcher.contains())
                 .withIgnoreCase();
 
         Example<User> example = Example.of(findEmail,exampleMatcher);
@@ -81,8 +92,9 @@ public class SearchService implements ISearchService {
         findTel.setTelefon(telefon);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id","name","vorname","email")
-                .withIgnoreCase();
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.EXACT)
+                .withMatcher("telefon", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findTel,exampleMatcher);
 
@@ -101,8 +113,9 @@ public class SearchService implements ISearchService {
         findStreet.setStrasse(strasse);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name", "vorname", "email", "telefon")
-                .withIgnoreCase();
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("strasse", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findStreet,exampleMatcher);
 
@@ -119,11 +132,12 @@ public class SearchService implements ISearchService {
         User findOrt = new User();
         findOrt.setOrt(ort);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
-                .withIgnoreCase();
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("ort", matcher -> matcher.contains());
 
-        Example<User> example = Example.of(findOrt, matcher);
+        Example<User> example = Example.of(findOrt, exampleMatcher);
 
         list = repository.findAll(example);
 
@@ -139,11 +153,12 @@ public class SearchService implements ISearchService {
         User findPlz = new User();
         findPlz.setPlz(plz);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name", "vorname", "email", "telefon", "strasse", "ort")
-                .withIgnoreCase();
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("plz", matcher -> matcher.contains());
 
-        Example<User> example = Example.of(findPlz, matcher);
+        Example<User> example = Example.of(findPlz, exampleMatcher);
 
         list = repository.findAll(example);
 
@@ -158,11 +173,12 @@ public class SearchService implements ISearchService {
         User findSex = new User();
         findSex.setSex(sex);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name", "vorname", "email", "telefon", "strasse", "ort", "plz")
-                .withIgnoreCase();
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("sex", matcher -> matcher.contains());
 
-        Example<User> example = Example.of(findSex, matcher);
+        Example<User> example = Example.of(findSex, exampleMatcher);
 
         list = repository.findAll(example);
 
@@ -178,8 +194,9 @@ public class SearchService implements ISearchService {
         findSpitzname.setSpitzname(spitzname);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name", "vorname", "email", "telefon", "strasse", "ort", "plz", "sex")
-                .withIgnoreCase();
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("spitzname", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findSpitzname, exampleMatcher);
 
@@ -197,10 +214,29 @@ public class SearchService implements ISearchService {
         findBirthday.setBirthday(birthday);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id", "name", "vorname", "email", "telefon", "strasse", "ort", "plz", "sex", "spitzname")
-                .withIgnoreCase();
+                .withIgnorePaths("id")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withMatcher("birthday", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findBirthday, exampleMatcher);
+
+        list = repository.findAll(example);
+
+        return list;
+    }
+
+    @Override
+    public List<User> findByCourses(Faecher courses){
+
+        List<User> list;
+        User findCourses = new User();
+
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withIgnorePaths("id")
+                .withIncludeNullValues();
+
+        Example<User> example = Example.of(findCourses, exampleMatcher);
 
         list = repository.findAll(example);
 

@@ -2,15 +2,9 @@ package com.example.userSBN.model;
 
 
 import com.sun.istack.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import net.bytebuddy.build.HashCodeAndEqualsPlugin;
-import org.apache.catalina.Store;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -83,7 +77,8 @@ public class User implements Serializable {
             inverseJoinColumns = {
                     @JoinColumn(name = "fach_id", referencedColumnName = "id",
                             nullable = false, updatable = false)})
-    Set<Faecher> courses;
+    private Set<Faecher> courses;
+
 
     @Transient
     private Set<Integer> ints ;

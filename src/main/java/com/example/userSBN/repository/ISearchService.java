@@ -27,6 +27,8 @@ public interface ISearchService {
 
     List<User> findByBirthday(String birthday);
 
+    List<User> findByCourses(String courses);
+
     List<User> findByNameEnding(String ending);
 
     List<User> findByLastnameEnding(String ending);

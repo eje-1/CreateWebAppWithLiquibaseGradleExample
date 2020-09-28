@@ -28,7 +28,7 @@ public class ManyToManyTest {
 
             faecherRepository.saveAll(Arrays.asList(course1,course2,course3));
 
-            student.getCourses().addAll(Arrays.asList(course1,course2,course3));
+            //student.getCourses().addAll(Arrays.asList(course1,course2,course3));
 
             userRepository.save(student);
 
