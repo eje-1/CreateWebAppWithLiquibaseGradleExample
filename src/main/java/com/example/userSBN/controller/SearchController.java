@@ -2,8 +2,10 @@ package com.example.userSBN.controller;
 
 import com.example.userSBN.model.Faecher;
 import com.example.userSBN.model.User;
+import com.example.userSBN.repository.FaecherRepository;
 import com.example.userSBN.repository.ISearchService;
 import com.example.userSBN.repository.SearchRepository;
+import com.example.userSBN.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.env.Environment;
@@ -15,7 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 @EnableAutoConfiguration
 @Controller
@@ -25,15 +30,20 @@ public class SearchController {
     SearchRepository searchRepository;
 
     @Autowired
+    FaecherRepository faecherRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     ISearchService iSearchService;
 
     private String appMode;
 
     @Autowired
-    public SearchController(Environment environment){
+    public SearchController(Environment environment) {
         appMode = environment.getProperty("app-mode");
     }
-
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -45,8 +55,8 @@ public class SearchController {
                          @Param("ort") String ort,
                          @Param("plz") String plz,
                          @Param("sex") String sex,
-                         @Param("spitzname")String spitzname,
-                         @Param("birthday")String birthday,
+                         @Param("spitzname") String spitzname,
+                         @Param("birthday") String birthday,
                          @Param("courses") String courses,
                          Model model) {
 
@@ -58,7 +68,7 @@ public class SearchController {
         HashMap<String, List<User>> resultMap = new HashMap<>();
         List<User> result = new ArrayList<>();
 
-        if (name != null && !name.equals("")){
+        if (name != null && !name.equals("")) {
             for (User user : iSearchService.findByName(name)) {
                 result.add(user);
             }
@@ -66,81 +76,80 @@ public class SearchController {
             //resultMap.put("endNameResult", iSearchService.findByNameEnding(name));
             //listen.add(iSearchService.findByName(name));
         }
-        if (vorname != null && !vorname.equals("")){
+        if (vorname != null && !vorname.equals("")) {
             for (User user : iSearchService.findByVorname(vorname)) {
                 result.add(user);
             }
             //resultMap.put("vornameResults", iSearchService.findByVorname(vorname));
             //resultMap.put("endVornameResults", iSearchService.findByLastnameEnding(vorname));
         }
-        if (email != null && !email.equals("")){
-            for (User user: iSearchService.findByEmail(email)) {
+        if (email != null && !email.equals("")) {
+            for (User user : iSearchService.findByEmail(email)) {
                 result.add(user);
             }
             //resultMap.put("emailResults", iSearchService.findByEmail(email));
             //resultMap.put("endEmailResults", iSearchService.findByEmailEnding(email));
         }
-        if (telefon != null && !telefon.equals("")){
-            for (User user: iSearchService.findByTelefon(telefon)) {
+        if (telefon != null && !telefon.equals("")) {
+            for (User user : iSearchService.findByTelefon(telefon)) {
                 result.add(user);
             }
             //resultMap.put("telefonResults",  iSearchService.findByTelefon(telefon));
             //resultMap.put("endTelefonResults",  iSearchService.findByTelefonEnding(telefon));
         }
-        if (strasse != null && !strasse.equals("")){
-            for (User user: iSearchService.findByStrasse(strasse)) {
+        if (strasse != null && !strasse.equals("")) {
+            for (User user : iSearchService.findByStrasse(strasse)) {
                 result.add(user);
             }
             //resultMap.put("strasseResults", iSearchService.findByStrasse(strasse));
             //resultMap.put("endStrasseResult", iSearchService.findBySpitznameEnding(strasse));
 
         }
-        if (ort != null && !ort.equals("")){
-            for (User user: iSearchService.findByOrt(ort)) {
+        if (ort != null && !ort.equals("")) {
+            for (User user : iSearchService.findByOrt(ort)) {
                 result.add(user);
             }
             //resultMap.put("ortResults", iSearchService.findByOrt(ort));
             //resultMap.put("endOrtResults", iSearchService.findByOrtEnding(ort));
         }
 
-        if (plz != null && !plz.equals("")){
-            for (User user: iSearchService.findByPlz(plz)) {
+        if (plz != null && !plz.equals("")) {
+            for (User user : iSearchService.findByPlz(plz)) {
                 result.add(user);
             }
             //resultMap.put("plzResults", iSearchService.findByPlz(plz));
             //resultMap.put("endPlzResults", iSearchService.findByPlzEnding(plz));
         }
 
-        if (sex != null && !sex.equals("")){
-            for (User user: iSearchService.findBySex(sex)) {
+        if (sex != null && !sex.equals("")) {
+            for (User user : iSearchService.findBySex(sex)) {
                 result.add(user);
             }
             //resultMap.put("sexResults", iSearchService.findBySex(sex));
             //resultMap.put("endSexResult", iSearchService.findBySexEnding(sex));
         }
 
-        if (spitzname != null && !spitzname.equals("")){
-            for (User user: iSearchService.findBySpitzname(spitzname)) {
+        if (spitzname != null && !spitzname.equals("")) {
+            for (User user : iSearchService.findBySpitzname(spitzname)) {
                 result.add(user);
             }
             //resultMap.put("spitznameResults", iSearchService.findBySpitzname(spitzname));
             //resultMap.put("endSpitznameResults", iSearchService.findBySpitznameEnding(spitzname));
         }
 
-        if (birthday != null && !birthday.equals("")){
-            for (User user: iSearchService.findByBirthday(birthday)) {
+        if (birthday != null && !birthday.equals("")) {
+            for (User user : iSearchService.findByBirthday(birthday)) {
                 result.add(user);
             }
             //resultMap.put("birthdayResults", iSearchService.findByBirthday(birthday));
             //resultMap.put("endBirthdayResults", iSearchService.findByBirthdayEnding(birthday));
         }
 
-        if (courses != null){
+        if (courses != null && !courses.equals("")) {
             for (User user : iSearchService.findByCourses(courses)) {
-               result.add(user);
+                result.add(user);
             }
         }
-
 
         model.addAttribute("result", result);
 
@@ -158,12 +167,13 @@ public class SearchController {
                         .withIgnorePaths("id")
                         .withStringMatcher(ExampleMatcher.StringMatcher.STARTING)));
 
+        List<Faecher> allFeacher = faecherRepository.findAll();//get all entries from Entry table into a list
+
         model.addAttribute("users", findAll);
+        model.addAttribute("courses", allFeacher);
         model.addAttribute("mode", appMode);
 
         return "/searchAll";
-
-
     }
 
     /*ich kann jeder iserviceList in model hinzufugen und model return*/

@@ -53,18 +53,29 @@
         <div class="col">
             <h1 class="display-4">Search ALL</h1>
             <hr>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/search}", method="post">
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Name" name="name" th:value="${name}"/>
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Lastname" name="vorname" th:value="${vorname}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Mail" name="email" th:value="${email}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by mobilephone" name="telefon" th:value="${telefon}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Street" name="strasse" th:value="${strasse}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Place" name="ort" th:value="${ort}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by PLZ" name="plz" th:value="${plz}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Sex Male or Female" name="sex" th:value="${sex}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Nickname" name="spitzname" th:value="${spitzname}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Birthday" name="birthday" th:value="${birthday}" />
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Courses" name="courses" th:value="${courses}" />
+            <form class="form-inline my-2 my-lg-0" th:action="@{/search}" , method="post">
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Name" name="name"
+                       th:value="${name}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Lastname" name="vorname"
+                       th:value="${vorname}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Mail" name="email"
+                       th:value="${email}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by mobilephone" name="telefon"
+                       th:value="${telefon}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Street" name="strasse"
+                       th:value="${strasse}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Place" name="ort"
+                       th:value="${ort}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by PLZ" name="plz"
+                       th:value="${plz}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Sex Male or Female" name="sex"
+                       th:value="${sex}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Nickname" name="spitzname"
+                       th:value="${spitzname}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Birthday" name="birthday"
+                       th:value="${birthday}"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Find by Courses" name="courses"
+                       th:value="${courses}"/>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <hr>
@@ -81,6 +92,8 @@
                     <th scope="col">Sex &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th scope="col">Nickname &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
                     <th scope="col">Birthday &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th scope="col">Courses &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+
                 </tr>
                 </thead>
                 <tr th:each="user : ${users}">
@@ -94,6 +107,11 @@
                     <td th:utext="${user.sex}">...</td>
                     <td th:utext="${user.spitzname}">...</td>
                     <td th:utext="${user.birthday}">...</td>
+                    <td>
+                        <span th:each="course,iterStat : ${user.courses}">
+					<span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				</span>
+                    </td>
                 </tr>
                 <tr th:each="user : ${result}">
                     <td th:utext="${user.name}">...</td>

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 
@@ -32,8 +33,8 @@ public class Faecher implements Serializable{
     @Column(name = "stufe")
     private String stufe;
 
-    //@ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    private Set<User> student;
 
     //Einfache konstruktor
     public Faecher(){
@@ -78,6 +79,14 @@ public class Faecher implements Serializable{
 
     public void setStufe(String stufe) {
         this.stufe = stufe;
+    }
+
+    public Set<User> getStudent() {
+        return student;
+    }
+
+    public void setStudent(Set<User> student) {
+        this.student = student;
     }
 
 
