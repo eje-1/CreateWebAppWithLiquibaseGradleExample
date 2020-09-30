@@ -1,6 +1,7 @@
 buildscript {
 	ext {
 		springBootVersion = '2.3.1.RELEASE'
+		queryDslVersion = "4.2.1"
 	}
 	repositories {
 		mavenCentral()
@@ -9,15 +10,18 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath 'org.liquibase:liquibase-core:3.4.1'
 		classpath "org.liquibase:liquibase-gradle-plugin:1.1.1"
+		classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.9"
+		classpath('net.ltgt.gradle:gradle-apt-plugin:0.18')
 	}
 }
-
 
 plugins {
 	id 'org.springframework.boot' version '2.3.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
 }
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -28,17 +32,23 @@ repositories {
 }
 
 dependencies {
+
+	//Lombok
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
-	testCompileOnly 'org.projectlombok:lombok:1.18.12'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
 
+	//Hibernate
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.5.Final'
 
-	testCompile 'junit:junit:4.12'
-	compile 'junit:junit:4.12'
+	// QueryDSL
+	compile("com.querydsl:querydsl-jpa:${queryDslVersion}",
+			"com.querydsl:querydsl-apt:${queryDslVersion}:jpa",
+			"com.querydsl:querydsl-core:${queryDslVersion}")
 
+	//Joda time
+	compile 'joda-time:joda-time:2.9.4'
 
+	//SpringBoot
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -56,3 +66,7 @@ test {
 	useJUnitPlatform()
 }
 
+querydsl {
+	jpa = true
+	querydslDefault = false
+}

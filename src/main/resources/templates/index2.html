@@ -74,6 +74,7 @@
                 <th scope="col">Sex &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
                 <th scope="col">Nickname &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
                 <th scope="col">Birthday &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                <th scope="col">Courses &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
                 <th scope="col">Actions on Row</th>
             </tr>
             </thead>
@@ -88,6 +89,11 @@
                 <td th:utext="${user.sex}">...</td>
                 <td th:utext="${user.spitzname}">...</td>
                 <td th:utext="${user.birthday}">...</td>
+                <td>
+                        <span th:each="course,iterStat : ${user.courses}">
+					<span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				</span>
+                </td>
                 <td align="center">
                     <a th:href="@{/editPerson/update/{id}(id=${user.id})}"><button type="button" class="btn btn-info">Edit</button></a> |
                     <a th:href="@{/delete/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')"><button type="button" class="btn btn-danger">Delete</button></a>

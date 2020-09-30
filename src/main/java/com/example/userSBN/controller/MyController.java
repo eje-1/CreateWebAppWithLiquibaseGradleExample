@@ -75,7 +75,9 @@ public class MyController {
     public String index2(Model model){
 
         List<User> allUsers = userRepository.findAll(); //get all entries from Entry table into a list
+        List<Faecher> allFeacher = faecherRepository.findAll();//get all entries from Entry table into a list
         model.addAttribute("users", allUsers);//get the contents of list into the Thymeleaf template
+        model.addAttribute("courses", allFeacher);
         model.addAttribute("mode", appMode);
 
         return "index2";

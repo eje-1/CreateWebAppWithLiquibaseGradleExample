@@ -2,7 +2,6 @@ package com.example.userSBN.controller;
 
 import com.example.userSBN.model.Faecher;
 import com.example.userSBN.repository.FaecherRepository;
-import com.example.userSBN.services.FaecherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.env.Environment;
@@ -26,8 +25,6 @@ public class FaecherController {
     @Autowired
     private FaecherRepository faecherRepository;
 
-    @Autowired
-    private FaecherService faecherService;
 
     private String appmode;
 
