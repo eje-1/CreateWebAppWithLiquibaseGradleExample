@@ -1,4 +1,4 @@
-package com.example.userSBN.repository;
+package com.example.userSBN.services;
 
 import com.example.userSBN.model.User;
 
@@ -29,6 +29,8 @@ public interface ISearchService {
 
     List<User> findByCourses(String courses);
 
+    /**
+
     List<User> findByNameEnding(String ending);
 
     List<User> findByLastnameEnding(String ending);
@@ -48,6 +50,8 @@ public interface ISearchService {
     List<User> findBySpitznameEnding(String ending);
 
     List<User> findByBirthdayEnding(String ending);
+
+     */
 
 
 

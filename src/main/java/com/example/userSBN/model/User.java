@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 
@@ -77,7 +78,7 @@ public class User implements Serializable {
             inverseJoinColumns = {
                     @JoinColumn(name = "fach_id", referencedColumnName = "id",
                             nullable = false, updatable = false)})
-    private Set<Faecher> courses;
+    private List<Faecher> courses;
 
 
     @Transient
@@ -194,11 +195,11 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
-    public Set<Faecher> getCourses() {
+    public List<Faecher> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<Faecher> courses) {
+    public void setCourses(List<Faecher> courses) {
         this.courses = courses;
     }
 

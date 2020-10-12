@@ -63,7 +63,7 @@ dependencies {
 
 apply plugin: 'liquibase'
 apply plugin: 'com.ewerk.gradle.plugins.querydsl'
-def queryDslSourceDirectory = 'src/main/generated'
+def queryDslSourceDirectory = 'src/querydsl/java/generated'
 
 test {
 	useJUnitPlatform()

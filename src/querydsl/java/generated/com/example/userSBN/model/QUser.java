@@ -22,7 +22,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath birthday = createString("birthday");
 
-    public final SetPath<Faecher, QFaecher> courses = this.<Faecher, QFaecher>createSet("courses", Faecher.class, QFaecher.class, PathInits.DIRECT2);
+    public final ListPath<Faecher, QFaecher> courses = this.<Faecher, QFaecher>createList("courses", Faecher.class, QFaecher.class, PathInits.DIRECT2);
 
     public final StringPath email = createString("email");
 

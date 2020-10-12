@@ -1,28 +1,19 @@
 package com.example.userSBN.services;
 
-import com.example.userSBN.model.Faecher;
 import com.example.userSBN.model.User;
-import com.example.userSBN.repository.FaecherRepository;
-import com.example.userSBN.repository.ISearchService;
 import com.example.userSBN.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class SearchService implements ISearchService {
 
     @Autowired
     SearchRepository repository;
-
-    @Autowired
-    FaecherRepository faecherRepository;
-
 
     @Override
     public List<User> findByName(String name) {
@@ -226,32 +217,15 @@ public class SearchService implements ISearchService {
         return list;
     }
 
+
     @Override
     public List<User> findByCourses(String courses) {
 
-        List<User> list;
-        Set<Faecher> faecherSet = new HashSet<>();
-        List<Faecher> faecherList;
-
-        faecherSet.add(new Faecher(courses, null, null));
-        User findCourses = new User();
-        findCourses.setCourses(faecherSet);
-
-        faecherList = faecherRepository.findByName(courses);
-
-
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
-                .withMatcher("name", matcher -> matcher.contains());
-
-        Example<User> example = Example.of(findCourses, exampleMatcher);
-
-        list = repository.findAll(example);
-
-        return list;
+        return null; // retutn list
     }
 
+
+/**
     @Override
     public List<User> findByNameEnding(String ending) {
 
@@ -471,4 +445,5 @@ public class SearchService implements ISearchService {
 
         return list;
     }
+    */
 }

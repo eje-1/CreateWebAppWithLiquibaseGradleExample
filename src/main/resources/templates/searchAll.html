@@ -74,11 +74,18 @@
                        th:value="${spitzname}"/>
                 <input class="form-control mr-sm-2" type="search" placeholder="Find by Birthday" name="birthday"
                        th:value="${birthday}"/>
-                <input class="form-control mr-sm-2" type="search" placeholder="Find by Courses" name="courses"
-                       th:value="${courses}"/>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+
+            <!-- Query DSL-->
             <hr>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/searchAll2}" , method="post">
+                <input class="form-control mr-sm-2" type="search" placeholder="Find Studnet by Courses" name="courses"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Student with Courses</button>
+
+            </form>
+            <hr>
+
             <table class="table table-bordered table-dark">
                 <thead>
                 <tr align="center">
@@ -113,6 +120,7 @@
 				</span>
                     </td>
                 </tr>
+
                 <tr th:each="user : ${result}">
                     <td th:utext="${user.name}">...</td>
                     <td th:utext="${user.vorname}">...</td>
@@ -124,9 +132,31 @@
                     <td th:utext="${user.sex}">...</td>
                     <td th:utext="${user.spitzname}">...</td>
                     <td th:utext="${user.birthday}">...</td>
+                    <td>
+                        <span th:each="course,iterStat : ${user.courses}">
+					<span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				</span>
+                    </td>
+                </tr>
+
+                <tr th:each="user : ${search}">
+                    <td th:utext="${user.name}">...</td>
+                    <td th:utext="${user.vorname}">...</td>
+                    <td th:utext="${user.email}">...</td>
+                    <td th:utext="${user.telefon}">...</td>
+                    <td th:utext="${user.strasse}">...</td>
+                    <td th:utext="${user.ort}">...</td>
+                    <td th:utext="${user.plz}">...</td>
+                    <td th:utext="${user.sex}">...</td>
+                    <td th:utext="${user.spitzname}">...</td>
+                    <td th:utext="${user.birthday}">...</td>
+                    <td>
+                        <span th:each="course,iterStat : ${user.courses}">
+					<span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				</span>
+                    </td>
                 </tr>
             </table>
-
         </div>
 
         <!-- Bootstrap core JavaScript
