@@ -157,22 +157,22 @@ public class SearchController {
 
     @RequestMapping(value = "/searchwithcourses", method = RequestMethod.POST)
     public String searchAll(Model model,
-                            @Param("courses") String key) {
+                            @Param("courses") String courses) {
 
         List<User> resultOnCourses = new ArrayList<>();
         List<Faecher> allCourses = faecherRepository.findAll();//get all entries from Entry table into a list
 
-        if (key != null) {
+        if (courses != null) {
 
             JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
             QFaecher qFaecher = QFaecher.faecher;
             QUser user = QUser.user;
             resultOnCourses = queryFactory.selectFrom(user)
                     .innerJoin(user.courses, qFaecher)
-                    .on(qFaecher.name.eq(key))
+                    .on(qFaecher.name.eq(courses))
                     .fetch();
 
-        } else if (key == null) {
+        } else if (courses == null) {
             System.out.println("error");
         }
 
