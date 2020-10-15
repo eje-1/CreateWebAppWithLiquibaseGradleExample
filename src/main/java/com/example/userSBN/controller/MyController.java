@@ -24,9 +24,11 @@ import java.util.List;
 import java.util.Optional;
 
 
-/**Controller ist eine Klasse  Controller, die die Anforderung vom Benutzer behandelt und den Strom (flow) der Applikation kontrolliert.
+/**
+ * Controller ist eine Klasse  Controller, die die Anforderung vom Benutzer behandelt und den Strom (flow) der Applikation kontrolliert.
  * Das Kommentar  @SpringBootApplication ist so ähnlich wie die Benutzung von @Configuration, @EnableAutoConfiguration und  @ComponentScan mit ihren standardmäßigen Attribute
- * Deshalb hilft  @SpringBootApplication Ihnen bei der automatischen Konfigurierung vom Spring, und ganz den Projekt automatisch überprüfen (Scan) um die Elemente von Spring  ( Controller, Bean, Service,...) zu finden*/
+ * Deshalb hilft  @SpringBootApplication Ihnen bei der automatischen Konfigurierung vom Spring, und ganz den Projekt automatisch überprüfen (Scan) um die Elemente von Spring  ( Controller, Bean, Service,...) zu finden
+ */
 
 @EnableAutoConfiguration
 @Component
@@ -51,9 +53,11 @@ public class MyController {
 
 
     /**Diese funktion sollte aufgerufen werden wenn es ein get request rein kommt "
-    * path = "" <--- der path der methodt
-    * produces = MediaType.Application_JSON_VALUE    <--- wandle das ganze in ein json format*/
-    /**Die Annotation @GetMapping("/")legt fest, dass GET-Requests auf Root von der darauf folgenden Methode (hier also home()) behandelt werden.*/
+     * path = "" <--- der path der methodt
+     * produces = MediaType.Application_JSON_VALUE    <--- wandle das ganze in ein json format*/
+    /**
+     * Die Annotation @GetMapping("/")legt fest, dass GET-Requests auf Root von der darauf folgenden Methode (hier also home()) behandelt werden.
+     */
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET) //path wo wir das meppen mochten
     public String index(Model model) {
 
@@ -65,14 +69,16 @@ public class MyController {
     private String appMode;
 
     @Autowired
-    public MyController(Environment environment){
+    public MyController(Environment environment) {
         appMode = environment.getProperty("app-mode");
     }
 
-    /**Bootstrap */
+    /**
+     * Bootstrap
+     */
 
     @RequestMapping(value = "/index2", method = RequestMethod.GET)
-    public String index2(Model model){
+    public String index2(Model model) {
 
         List<User> allUsers = userRepository.findAll(); //get all entries from Entry table into a list
         List<Faecher> allFeacher = faecherRepository.findAll();//get all entries from Entry table into a list
@@ -97,16 +103,16 @@ public class MyController {
 
 
     //delete an user
-    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public String deleteMethod(@PathVariable(value = "id") int userID){
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteMethod(@PathVariable(value = "id") int userID) {
 
         userRepository.deleteById(userID);
         return "redirect:/index2";
     }
 
     // editUser get Id
-    @RequestMapping(value = { "/editPerson/update/{id}" }, method = RequestMethod.GET)
-    public String showEditPersonPage(@PathVariable(name = "id") int id, Model model)  {
+    @RequestMapping(value = {"/editPerson/update/{id}"}, method = RequestMethod.GET)
+    public String showEditPersonPage(@PathVariable(name = "id") int id, Model model) {
 
         Optional<User> userEdit = userRepository.findById(id);
         List<Faecher> faecherOptional = faecherRepository.findAll();
@@ -121,14 +127,14 @@ public class MyController {
 
     // edit user save method
     @RequestMapping(value = {"/editPerson/update/{id}"}, method = RequestMethod.POST)
-    public String saveEditPerson(Model model, @PathVariable(name = "id") Integer id, @ModelAttribute @Valid User user,BindingResult error) {
+    public String saveEditPerson(Model model, @PathVariable(name = "id") Integer id, @ModelAttribute @Valid User user, BindingResult error) {
 
 
         Optional<User> result = userRepository.findById(id);
 
         System.out.println(error);
 
-        if(result.isPresent()) {
+        if (result.isPresent()) {
             User user1 = result.get();
             user1.setName(user.getName());
             user1.setVorname(user.getVorname());
@@ -141,9 +147,9 @@ public class MyController {
             user1.setSpitzname(user.getSpitzname());
             user1.setBirthday(user.getBirthday());
             //
-            for (Integer fachId : user.getInts()){
+            for (Integer fachId : user.getInts()) {
                 Optional<Faecher> faecherOptional = faecherRepository.findById(fachId);
-                if (faecherOptional.isPresent()){
+                if (faecherOptional.isPresent()) {
                     user1.getCourses().add(faecherOptional.get());
                 }
             }

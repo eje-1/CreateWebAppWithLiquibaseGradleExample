@@ -31,29 +31,27 @@ public interface ISearchService {
 
     /**
 
-    List<User> findByNameEnding(String ending);
+     List<User> findByNameEnding(String ending);
 
-    List<User> findByLastnameEnding(String ending);
+     List<User> findByLastnameEnding(String ending);
 
-    List<User> findByEmailEnding(String ending);
+     List<User> findByEmailEnding(String ending);
 
-    List<User> findByTelefonEnding(String ending);
+     List<User> findByTelefonEnding(String ending);
 
-    List<User> findByStrasseEnding(String ending);
+     List<User> findByStrasseEnding(String ending);
 
-    List<User> findByOrtEnding(String ending);
+     List<User> findByOrtEnding(String ending);
 
-    List<User> findByPlzEnding(String ending);
+     List<User> findByPlzEnding(String ending);
 
-    List<User> findBySexEnding(String ending);
+     List<User> findBySexEnding(String ending);
 
-    List<User> findBySpitznameEnding(String ending);
+     List<User> findBySpitznameEnding(String ending);
 
-    List<User> findByBirthdayEnding(String ending);
+     List<User> findByBirthdayEnding(String ending);
 
      */
-
-
 
 
 }

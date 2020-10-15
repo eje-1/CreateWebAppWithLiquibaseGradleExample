@@ -29,7 +29,7 @@ public class FaecherController {
     private String appmode;
 
     @Autowired
-    public FaecherController(Environment environment){
+    public FaecherController(Environment environment) {
 
         appmode = environment.getProperty("app-mode");
 
@@ -37,7 +37,7 @@ public class FaecherController {
 
     //Fächer index
     @RequestMapping(value = "/faecherIndex", method = RequestMethod.GET)
-    public String faecherIndex(Model model){
+    public String faecherIndex(Model model) {
 
         List<Faecher> allFeacher = faecherRepository.findAll();//get all entries from Entry table into a list
 
@@ -49,7 +49,7 @@ public class FaecherController {
 
     // showpage create Fach
     @RequestMapping(value = "/addFaecher", method = RequestMethod.GET)
-    public String createFaecherPage(Model model){
+    public String createFaecherPage(Model model) {
 
         Faecher newFach = new Faecher();
         model.addAttribute("newFach", newFach);
@@ -60,14 +60,14 @@ public class FaecherController {
 
     //Add fach to table
     @RequestMapping(value = "/addFaecher", method = RequestMethod.POST)
-    public String saveNewFach(Model model, @ModelAttribute("newFach") Faecher faecher){
+    public String saveNewFach(Model model, @ModelAttribute("newFach") Faecher faecher) {
 
         String name = faecher.getName();
         String abkuerzung = faecher.getAbkuerzung();
         String stufe = faecher.getStufe();
 
-        if(name != null && name.length() > 0 && abkuerzung != null && abkuerzung.length() > 0
-                && stufe != null && stufe.length() > 0){
+        if (name != null && name.length() > 0 && abkuerzung != null && abkuerzung.length() > 0
+                && stufe != null && stufe.length() > 0) {
 
             Faecher newFaecher = new Faecher(name, abkuerzung, stufe);
             faecherRepository.save(newFaecher);
@@ -77,7 +77,7 @@ public class FaecherController {
 
     //Edit fach get id
     @RequestMapping(value = {"/editFaecher/update/{id}"}, method = RequestMethod.GET)
-    public String showEditFachPage(@PathVariable(name = "id") int id, Model model){
+    public String showEditFachPage(@PathVariable(name = "id") int id, Model model) {
 
         Optional<Faecher> result = faecherRepository.findById(id);
         model.addAttribute("editFach", result);
@@ -87,11 +87,11 @@ public class FaecherController {
 
     //Edit fach save method
     @RequestMapping(value = {"/editFaecher/update/{id}"}, method = RequestMethod.POST)
-    public String saveEditFach(Model model, int id, @ModelAttribute("editFach") Faecher faecher){
+    public String saveEditFach(Model model, int id, @ModelAttribute("editFach") Faecher faecher) {
 
         Optional<Faecher> result = faecherRepository.findById(id);
         Faecher editFach = result.orElse(null);
-        if (faecher != null){
+        if (faecher != null) {
             faecherRepository.save(faecher);
         }
         return "redirect:/faecherIndex";
@@ -99,17 +99,13 @@ public class FaecherController {
 
     //Delete method
     @RequestMapping(value = {"/deleteFach/{id}"}, method = RequestMethod.GET)
-    public String deleteFach(@PathVariable(value = "id") int fachID){
+    public String deleteFach(@PathVariable(value = "id") int fachID) {
 
         faecherRepository.deleteById(fachID); // repository delete by id
 
         return "redirect:/faecherIndex";
 
     }
-
-
-
-
 
 
 }

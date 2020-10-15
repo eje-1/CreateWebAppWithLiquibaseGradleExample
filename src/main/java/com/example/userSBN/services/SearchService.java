@@ -26,6 +26,7 @@ public class SearchService implements ISearchService {
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withIgnoreCase()
                 .withMatcher("name", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findName, exampleMatcher);
@@ -45,6 +46,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("vorname", matcher -> matcher.contains());
 
@@ -64,6 +66,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("email", matcher -> matcher.contains())
                 .withIgnoreCase();
@@ -85,6 +88,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.EXACT)
                 .withMatcher("telefon", matcher -> matcher.contains());
 
@@ -106,6 +110,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("strasse", matcher -> matcher.contains());
 
@@ -126,6 +131,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("ort", matcher -> matcher.contains());
 
@@ -147,6 +153,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("plz", matcher -> matcher.contains());
 
@@ -167,6 +174,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("sex", matcher -> matcher.contains());
 
@@ -187,6 +195,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("spitzname", matcher -> matcher.contains());
 
@@ -207,6 +216,7 @@ public class SearchService implements ISearchService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
+                .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
                 .withMatcher("birthday", matcher -> matcher.contains());
 
@@ -226,224 +236,214 @@ public class SearchService implements ISearchService {
 
 
 /**
-    @Override
-    public List<User> findByNameEnding(String ending) {
+ @Override public List<User> findByNameEnding(String ending) {
 
-        List<User> userList;
+ List<User> userList;
 
-        //Filter Criteria
-        User findByNameEnd = new User(); //Create a new instance of the domain object.
-        findByNameEnd.setName(ending);  //Set properties
+ //Filter Criteria
+ User findByNameEnd = new User(); //Create a new instance of the domain object.
+ findByNameEnd.setName(ending);  //Set properties
 
-        //Create an ExampleMatcher to expect all values to match.
-        //It is usable at this stage even without further configuration.
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")  //Construct a new ExampleMatcher to ignore the id property path.
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING) // Construct a new ExampleMatcher to ignore the id property path, to include null values, and to perform suffix string matching
-                .withMatcher("name", match -> match.endsWith());
+ //Create an ExampleMatcher to expect all values to match.
+ //It is usable at this stage even without further configuration.
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")  //Construct a new ExampleMatcher to ignore the id property path.
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING) // Construct a new ExampleMatcher to ignore the id property path, to include null values, and to perform suffix string matching
+ .withMatcher("name", match -> match.endsWith());
 
-        Example<User> userExample;
-        userExample = Example.of(findByNameEnd, exampleMatcher); //Create a new Example based on the domain object and the configured ExampleMatcher.
+ Example<User> userExample;
+ userExample = Example.of(findByNameEnd, exampleMatcher); //Create a new Example based on the domain object and the configured ExampleMatcher.
 
-        userList = repository.findAll(userExample);
+ userList = repository.findAll(userExample);
 
-        return userList;
+ return userList;
 
-    }
+ }
 
-    @Override
-    public List<User> findByLastnameEnding(String ending) {
+ @Override public List<User> findByLastnameEnding(String ending) {
 
-        List<User> userList;
+ List<User> userList;
 
-        //Filter Criteria
-        User findByLastnameEnd = new User();
-        findByLastnameEnd.setVorname(ending);
+ //Filter Criteria
+ User findByLastnameEnd = new User();
+ findByLastnameEnd.setVorname(ending);
 
-        //ExampleMatcher
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("vorname", match -> match.endsWith());
+ //ExampleMatcher
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("vorname", match -> match.endsWith());
 
-        Example<User> example;
-        example = Example.of(findByLastnameEnd, exampleMatcher);
+ Example<User> example;
+ example = Example.of(findByLastnameEnd, exampleMatcher);
 
-        userList = repository.findAll(example);
+ userList = repository.findAll(example);
 
-        return userList;
+ return userList;
 
-    }
+ }
 
-    @Override
-    public List<User> findByEmailEnding(String ending) {
+ @Override public List<User> findByEmailEnding(String ending) {
 
-        // List of Studnets
-        List<User> userList;
+ // List of Studnets
+ List<User> userList;
 
-        //Filter Criteria
-        User findByEmailEnding = new User();
-        findByEmailEnding.setEmail(ending);
+ //Filter Criteria
+ User findByEmailEnding = new User();
+ findByEmailEnding.setEmail(ending);
 
-        //Example Matcher
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("email", match -> match.endsWith());
+ //Example Matcher
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("email", match -> match.endsWith());
 
-        Example<User> userExample = Example.of(findByEmailEnding, exampleMatcher);
+ Example<User> userExample = Example.of(findByEmailEnding, exampleMatcher);
 
-        // result
-        userList = repository.findAll(userExample);
+ // result
+ userList = repository.findAll(userExample);
 
-        return userList;
+ return userList;
 
-    }
+ }
 
-    @Override
-    public List<User> findByTelefonEnding(String ending) {
+ @Override public List<User> findByTelefonEnding(String ending) {
 
-        List<User> list;
+ List<User> list;
 
-        User findTelEnd = new User();
-        findTelEnd.setTelefon(ending);
+ User findTelEnd = new User();
+ findTelEnd.setTelefon(ending);
 
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("telefon", match -> match.endsWith());
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("telefon", match -> match.endsWith());
 
-        Example<User> example = Example.of(findTelEnd, exampleMatcher);
+ Example<User> example = Example.of(findTelEnd, exampleMatcher);
 
-        list = repository.findAll(example);
+ list = repository.findAll(example);
 
-        return list;
-    }
+ return list;
+ }
 
-    @Override
-    public List<User> findByStrasseEnding(String ending) {
+ @Override public List<User> findByStrasseEnding(String ending) {
 
-        List<User> list;
+ List<User> list;
 
-        User findStrasseEnd = new User();
-        findStrasseEnd.setTelefon(ending);
+ User findStrasseEnd = new User();
+ findStrasseEnd.setTelefon(ending);
 
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("strasse", match -> match.endsWith());
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("strasse", match -> match.endsWith());
 
-        Example<User> example = Example.of(findStrasseEnd, exampleMatcher);
+ Example<User> example = Example.of(findStrasseEnd, exampleMatcher);
 
-        list = repository.findAll(example);
+ list = repository.findAll(example);
 
-        return list;
-    }
+ return list;
+ }
 
-    @Override
-    public List<User> findByOrtEnding(String ending) {
+ @Override public List<User> findByOrtEnding(String ending) {
 
-        List<User> list;
+ List<User> list;
 
-        User findOrtEnd = new User();
-        findOrtEnd.setOrt(ending);
+ User findOrtEnd = new User();
+ findOrtEnd.setOrt(ending);
 
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("ort", match -> match.endsWith());
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("ort", match -> match.endsWith());
 
-        Example<User> example = Example.of(findOrtEnd, exampleMatcher);
+ Example<User> example = Example.of(findOrtEnd, exampleMatcher);
 
-        list = repository.findAll(example);
+ list = repository.findAll(example);
 
-        return list;
-    }
+ return list;
+ }
 
-    @Override
-    public List<User> findByPlzEnding(String ending) {
+ @Override public List<User> findByPlzEnding(String ending) {
 
-        List<User> list;
+ List<User> list;
 
-        User findPlzEnd = new User();
-        findPlzEnd.setPlz(ending);
+ User findPlzEnd = new User();
+ findPlzEnd.setPlz(ending);
 
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("plz", matcher -> matcher.endsWith());
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("plz", matcher -> matcher.endsWith());
 
-        Example<User> example = Example.of(findPlzEnd, exampleMatcher);
-        list = repository.findAll(example);
+ Example<User> example = Example.of(findPlzEnd, exampleMatcher);
+ list = repository.findAll(example);
 
-        return list;
-    }
+ return list;
+ }
 
-    @Override
-    public List<User> findBySexEnding(String ending) {
+ @Override public List<User> findBySexEnding(String ending) {
 
-        List<User> list;
-        User findSexEnd = new User();
-        findSexEnd.setSex(ending);
+ List<User> list;
+ User findSexEnd = new User();
+ findSexEnd.setSex(ending);
 
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("sex", matcher -> matcher.endsWith());
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("sex", matcher -> matcher.endsWith());
 
-        Example<User> example = Example.of(findSexEnd, exampleMatcher);
+ Example<User> example = Example.of(findSexEnd, exampleMatcher);
 
-        list = repository.findAll(example);
+ list = repository.findAll(example);
 
-        return list;
-    }
+ return list;
+ }
 
-    @Override
-    public List<User> findBySpitznameEnding(String ending) {
+ @Override public List<User> findBySpitznameEnding(String ending) {
 
-        List<User> list;
+ List<User> list;
 
-        User findSpitznameEnd = new User();
-        findSpitznameEnd.setSpitzname(ending);
+ User findSpitznameEnd = new User();
+ findSpitznameEnd.setSpitzname(ending);
 
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("spitzname", matcher -> matcher.endsWith());
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("spitzname", matcher -> matcher.endsWith());
 
-        Example<User> example = Example.of(findSpitznameEnd, exampleMatcher);
-        list = repository.findAll(example);
+ Example<User> example = Example.of(findSpitznameEnd, exampleMatcher);
+ list = repository.findAll(example);
 
-        return list;
-    }
+ return list;
+ }
 
-    @Override
-    public List<User> findByBirthdayEnding(String ending) {
+ @Override public List<User> findByBirthdayEnding(String ending) {
 
-        List<User> list;
+ List<User> list;
 
-        User findBirthdayEnd = new User();
-        findBirthdayEnd.setBirthday(ending);
+ User findBirthdayEnd = new User();
+ findBirthdayEnd.setBirthday(ending);
 
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
-                .withMatcher("birthday", matcher -> matcher.endsWith());
+ ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+ .withIgnorePaths("id")
+ .withIgnoreCase()
+ .withStringMatcher(ExampleMatcher.StringMatcher.ENDING)
+ .withMatcher("birthday", matcher -> matcher.endsWith());
 
-        Example<User> example = Example.of(findBirthdayEnd, exampleMatcher);
-        list = repository.findAll(example);
+ Example<User> example = Example.of(findBirthdayEnd, exampleMatcher);
+ list = repository.findAll(example);
 
-        return list;
-    }
-    */
+ return list;
+ }
+ */
 }

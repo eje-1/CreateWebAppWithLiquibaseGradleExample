@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "faecher")
-public class Faecher implements Serializable{
+public class Faecher implements Serializable {
 
 
     //Klassen Variable model faecher
@@ -37,7 +37,7 @@ public class Faecher implements Serializable{
     private Set<User> student;
 
     //Einfache konstruktor
-    public Faecher(){
+    public Faecher() {
 
     }
 
@@ -88,8 +88,6 @@ public class Faecher implements Serializable{
     public void setStudent(Set<User> student) {
         this.student = student;
     }
-
-
 
 
 }

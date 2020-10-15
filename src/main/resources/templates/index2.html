@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Database List Of Students</title>
     <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" />
-    <link href="../static/css/mdb.min.css" rel="stylesheet" th:href="@{/css/mdb.min.css}" />
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link href="../static/css/mdb.min.css" rel="stylesheet" th:href="@{/css/mdb.min.css}"/>
     <!--My Css -->
-    <link href="../static/css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link href="../static/css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     <!--Font Awesome-->
-    <link rel="stylesheet" href="../css/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/fonts/font-awesome.min.css"/>
     <!-- MDBootstrap Datatables  -->
-    <link href="../css/addons/datatables.min.css" rel="stylesheet" />
+    <link href="../css/addons/datatables.min.css" rel="stylesheet"/>
 
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-        <a class="navbar-brand" href="http://www.webmen.de" target="_blank"><img src="../css/img/WebMen_exakt.png" width="150" height="32" class="d-inline-block align-top" alt="" loading="lazy" /></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="http://www.webmen.de" target="_blank"><img src="../css/img/WebMen_exakt.png"
+                                                                                 width="150" height="32"
+                                                                                 class="d-inline-block align-top" alt=""
+                                                                                 loading="lazy"/></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Index Student</a>
+                    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">Index Student</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="http://localhost:8080/">Home</a>
-                        <a class="dropdown-item active" href="http://localhost:8080/index2">Index Student<span class="sr-only">(current)</span></a>
+                        <a class="dropdown-item active" href="http://localhost:8080/index2">Index Student<span
+                                class="sr-only">(current)</span></a>
                         <a class="dropdown-item" href="http://localhost:8080/faecherIndex">Index Courses</a>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Create</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">Create</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="http://localhost:8080/createPerson">Create Student</a>
                         <a class="dropdown-item" href="http://localhost:8080/addFaecher">Create Courses</a>
                     </div>
                 </li>
+                <li>
+                    <a class="nav-link" href="http://localhost:8080/searchAll" role="button" aria-haspopup="true"
+                       aria-expanded="false">Search</a>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/personList/suche}">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword" id="keyword" th:value="${keyword}" />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
 </head>
@@ -54,63 +61,77 @@
             <p class="lead">Students who are in the database...</p>
         </div>
         <div class="col col-lg-2">
-            <br />
-            <br />
+            <br/>
+            <br/>
             <a class="btn btn-primary btn-lg btn-block" href="createPerson" role="button">Create new student</a>
         </div>
     </div>
-    <hr class="my-4" />
-    <div class="container-fluid">
-        <table id="dtBasicExample" class="table table-bordered table-dark">
-            <thead>
-            <tr align="center">
-                <th scope="col">First Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Last Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">eMail &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Number &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Address &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Place &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Postcode &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Sex &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Nickname &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Birthday &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Courses &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th scope="col">Actions on Row</th>
-            </tr>
-            </thead>
-            <tr th:each="user : ${users}">
-                <td th:utext="${user.name}">...</td>
-                <td th:utext="${user.vorname}">...</td>
-                <td th:utext="${user.email}">...</td>
-                <td th:utext="${user.telefon}">...</td>
-                <td th:utext="${user.strasse}">...</td>
-                <td th:utext="${user.ort}">...</td>
-                <td th:utext="${user.plz}">...</td>
-                <td th:utext="${user.sex}">...</td>
-                <td th:utext="${user.spitzname}">...</td>
-                <td th:utext="${user.birthday}">...</td>
-                <td>
+    <hr class="my-4"/>
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Table View</h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <table id="dtBasicExample" class="table table-bordered table-responsive-md table-striped text-center">
+                    <!--id="dtBasicExample2"-->
+                    <thead>
+                    <tr align="center">
+                        <th scope="col">First Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Last Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">eMail &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Number &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Address &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Place &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Postcode &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Sex &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Nickname &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Birthday &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Courses &nbsp; <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th scope="col">Actions on Row</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="user : ${users}">
+                        <td th:utext="${user.name}">...</td>
+                        <td th:utext="${user.vorname}">...</td>
+                        <td th:utext="${user.email}">...</td>
+                        <td th:utext="${user.telefon}">...</td>
+                        <td th:utext="${user.strasse}">...</td>
+                        <td th:utext="${user.ort}">...</td>
+                        <td th:utext="${user.plz}">...</td>
+                        <td th:utext="${user.sex}">...</td>
+                        <td th:utext="${user.spitzname}">...</td>
+                        <td th:utext="${user.birthday}">...</td>
+                        <td>
                         <span th:each="course,iterStat : ${user.courses}">
 					<span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
 				</span>
-                </td>
-                <td align="center">
-                    <a th:href="@{/editPerson/update/{id}(id=${user.id})}"><button type="button" class="btn btn-info">Edit</button></a> |
-                    <a th:href="@{/delete/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')"><button type="button" class="btn btn-danger">Delete</button></a>
-                </td>
-            </tr>
-        </table>
-
-        <!-- Bootstrap core JavaScript
-================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-        <script src="../css/js/bootstrap.min.js" th:href="@{../css/js/bootstrap.min.js}"></script>
-        <script src="../css/js/my.js" th:href="@{../css/js/my.js}"></script>
-        <!-- MDBootstrap Datatables  -->
-        <script type="text/javascript" src="../css/addons/datatables.min.js" th:href="@{../css/addons/datatables.min.js}"></script>
+                        </td>
+                        <td align="center">
+                            <a th:href="@{/editPerson/update/{id}(id=${user.id})}">
+                                <button type="button" class="btn btn-info btn-rounded btn-sm my-0">Edit</button>
+                            </a> |
+                            <a th:href="@{/delete/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">
+                                <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
+
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="../css/js/bootstrap.min.js" th:href="@{../css/js/bootstrap.min.js}"></script>
+    <script src="../css/js/my.js" th:href="@{../css/js/my.js}"></script>
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="../css/addons/datatables.min.js"
+            th:href="@{../css/addons/datatables.min.js}"></script>
+</div>
 </div>
 <!-- /container -->
 

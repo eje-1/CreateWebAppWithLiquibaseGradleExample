@@ -82,11 +82,11 @@ public class User implements Serializable {
 
 
     @Transient
-    private Set<Integer> ints ;
+    private Set<Integer> ints;
 
 
     // Einfache konstruktor
-    public User(){
+    public User() {
 
     }
 
@@ -187,11 +187,11 @@ public class User implements Serializable {
         this.spitzname = spitzname;
     }
 
-    public String getBirthday(){
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday){
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -203,9 +203,9 @@ public class User implements Serializable {
         this.courses = courses;
     }
 
-    public boolean hasFaecher(Faecher faecher){
-        for(Faecher studentFach : getCourses()){
-            if(studentFach.getId() == faecher.getId()){
+    public boolean hasFaecher(Faecher faecher) {
+        for (Faecher studentFach : getCourses()) {
+            if (studentFach.getId() == faecher.getId()) {
                 return true;
             }
         }

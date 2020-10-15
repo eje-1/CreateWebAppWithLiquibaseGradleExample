@@ -14,10 +14,10 @@ public class UserService {
     UserRepository repo;
 
 
-        public List<User> listAll(String keyword){
-            if (keyword != null){
-                return repo.search(keyword);
-            }
-            return repo.findAll();
+    public List<User> listAll(String keyword) {
+        if (keyword != null) {
+            return repo.search(keyword);
         }
+        return repo.findAll();
     }
+}

@@ -47,8 +47,7 @@ public class SearchController {
     private String appMode;
 
     public static final QUser user = new QUser("user");
-    public static final  QFaecher faecher = new QFaecher("faecher");
-
+    public static final QFaecher faecher = new QFaecher("faecher");
 
     @Autowired
     public SearchController(Environment environment) {
@@ -93,6 +92,7 @@ public class SearchController {
         System.out.println("Number of Students inserted : " + searchRepository.count());
 
         List<User> result = new ArrayList<>();
+        List<Faecher> allFaecher = faecherRepository.findAll();
 
         if (name != null && !name.equals("")) {
             for (User user : iSearchService.findByName(name)) {
@@ -148,28 +148,36 @@ public class SearchController {
                 result.add(user);
             }
         }
-
         model.addAttribute("result", result);
+        model.addAttribute("courses", allFaecher);
 
         return "/searchAll";
 
     }
 
-    /*ich kann jeder iserviceList in model hinzufugen und model return*/
-
-    @RequestMapping(value = "/searchAll2", method = RequestMethod.POST)
+    @RequestMapping(value = "/searchwithcourses", method = RequestMethod.POST)
     public String searchAll(Model model,
-                            @Param("courses") String courses) {
+                            @Param("courses") String key) {
 
-        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
-        QFaecher qFaecher = QFaecher.faecher;
-        QUser user = QUser.user;
-        List<User> resultOnCourses = queryFactory.selectFrom(user)
-                .innerJoin(user.courses, qFaecher)
-                .on(qFaecher.name.eq(courses))
-                .fetch();
+        List<User> resultOnCourses = new ArrayList<>();
+        List<Faecher> allCourses = faecherRepository.findAll();//get all entries from Entry table into a list
+
+        if (key != null) {
+
+            JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+            QFaecher qFaecher = QFaecher.faecher;
+            QUser user = QUser.user;
+            resultOnCourses = queryFactory.selectFrom(user)
+                    .innerJoin(user.courses, qFaecher)
+                    .on(qFaecher.name.eq(key))
+                    .fetch();
+
+        } else if (key == null) {
+            System.out.println("error");
+        }
 
         model.addAttribute("search", resultOnCourses);
+        model.addAttribute("courses", allCourses);
 
         return "/searchAll";
 
