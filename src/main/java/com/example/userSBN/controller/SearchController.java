@@ -169,7 +169,7 @@ public class SearchController {
             QUser user = QUser.user;
             resultOnCourses = queryFactory.selectFrom(user)
                     .innerJoin(user.courses, qFaecher)
-                    .on(qFaecher.name.eq(courses))
+                    .on(qFaecher.name.eq(courses).or(qFaecher.stufe.eq(courses))) // with .or i can pass multiple values
                     .fetch();
 
         } else if (courses == null) {

@@ -175,7 +175,7 @@ public class SearchService implements ISearchService {
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
                 .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withStringMatcher(ExampleMatcher.StringMatcher.DEFAULT)
                 .withMatcher("sex", matcher -> matcher.contains());
 
         Example<User> example = Example.of(findSex, exampleMatcher);
@@ -229,9 +229,9 @@ public class SearchService implements ISearchService {
 
 
     @Override
-    public List<User> findByCourses(String courses) {
+    public List<User> findByKey(String key) {
 
-        return null; // retutn list
+       return null;
     }
 
 

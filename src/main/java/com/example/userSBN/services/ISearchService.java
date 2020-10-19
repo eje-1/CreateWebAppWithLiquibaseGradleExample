@@ -27,7 +27,7 @@ public interface ISearchService {
 
     List<User> findByBirthday(String birthday);
 
-    List<User> findByCourses(String courses);
+    List<User> findByKey(String key);
 
     /**
 
